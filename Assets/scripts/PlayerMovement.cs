@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
                 body.gravityScale = 7;
-                
+
             if (Input.GetKey(KeyCode.Space))
                 Jump();
 
@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, 0);
                 transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
 
-                }
+            }
             else
                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
 
@@ -75,11 +75,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // if (collision.gameObject.tag == "Ground")
-        //     isGrounded = true;
-    }
 
     private bool isGrounded()
     {
@@ -91,5 +86,10 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
         return raycastHit.collider != null;
+    }
+
+    public bool canAttack()
+    {
+        return horizontalInput == 0 && isGrounded() && !onWall();
     }
 }
