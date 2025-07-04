@@ -44,8 +44,8 @@ public class PlayerMovement : MonoBehaviour
             }
             else
                 body.gravityScale = 7;
-
-            if (Input.GetKey(KeyCode.Space) && isGrounded())
+                
+            if (Input.GetKey(KeyCode.Space))
                 Jump();
 
         }
@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         return raycastHit.collider != null;
     }
 
-        private bool onWall()
+    private bool onWall()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
         return raycastHit.collider != null;
